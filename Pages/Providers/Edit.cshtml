@@ -1,0 +1,60 @@
+﻿@page
+@model SupermarketWEB.Pages.Providers.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>Edit</h1>
+<h4>Provider</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Provider.Id" />
+            <div class="form-group">
+                <label asp-for="Provider.Name" class="control-label"></label>
+                <input asp-for="Provider.Name" class="form-control" />
+                <span asp-validation-for="Provider.Name" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Provider.Email" class="control-label"></label>
+                <input asp-for="Provider.Email" class="form-control" />
+                <span asp-validation-for="Provider.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Provider.Phone" class="control-label"></label>
+                <input asp-for="Provider.Phone" class="form-control" />
+                <span asp-validation-for="Provider.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Provider.Address" class="control-label"></label>
+                <input asp-for="Provider.Address" class="form-control" />
+                <span asp-validation-for="Provider.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Provider.City" class="control-label"></label>
+                <input asp-for="Provider.City" class="form-control" />
+                <span asp-validation-for="Provider.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Provider.State" class="control-label"></label>
+                <input asp-for="Provider.State" class="form-control" />
+                <span asp-validation-for="Provider.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }  
+
+}
