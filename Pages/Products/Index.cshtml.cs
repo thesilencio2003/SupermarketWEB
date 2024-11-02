@@ -15,7 +15,7 @@ namespace SupermarketWEB.Pages.Products
         {
             _context = context;
         }
-     
+
         public IList<Product> Products { get; set; } = default!;
 
         public async Task OnGetAsync()
