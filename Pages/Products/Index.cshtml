@@ -26,8 +26,12 @@
                 <td>@Html.DisplayFor(modelItem => item.Stock)</td>
 
                 <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                     <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
+
+
+
             </tr>
         }
     </tbody>
