@@ -11,32 +11,49 @@ namespace SupermarketWEB.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly SumpermarketContext _context;
+
+        public LoginModel(SumpermarketContext context)
+        {
+            _context = context;
+        }
+
         [BindProperty]
-        public User User { get; set; }
+        public string Email { get; set; }
+
+        [BindProperty]
+        public string Password { get; set; }
         public void OnGet()
         {
         }
 
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) return Page();
-            if (User.Email == "correo@gmail.com" && User.Password == "12345")
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == Email);
+
+            if (user != null && user.Password == Password) 
             {
                 var claims = new List<Claim>
-{
-                    new Claim(ClaimTypes.Name, "admin"),
-                    new Claim(ClaimTypes.Email,User.Email)
+            {
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");
-
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
                 return RedirectToPage("/Index");
             }
+
+            
+            ModelState.AddModelError(string.Empty, "Correo o contraseña incorrectos.");
             return Page();
         }
+
     }
 }
-
